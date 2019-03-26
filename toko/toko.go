@@ -6,6 +6,7 @@ type Toko interface {
 	Tutup()
 	TambahStokMinuman(minuman Minuman, qty int)
 	JualMinuman(minuman Minuman, qty int) bool
+	minumanIsAvailable(minuman Minuman, qty int) bool
 }
 
 type toko struct {
@@ -57,8 +58,6 @@ func (t *toko) kurangStokMinuman(minuman Minuman, qty int) {
 	if stok, ok := t.stokMinuman[namaMinuman]; ok {
 		if stok > 0 {
 			t.stokMinuman[namaMinuman] = stok - 1
-		} else {
-			t.stokMinuman[namaMinuman] = 0
 		}
 	}
 }
