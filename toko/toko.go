@@ -57,10 +57,10 @@ func (t *toko) kurangStokMinuman(minuman Minuman, qty int) {
 	if stok, ok := t.stokMinuman[namaMinuman]; ok {
 		if stok > 0 {
 			t.stokMinuman[namaMinuman] = stok - 1
-		} else {
-			t.stokMinuman[namaMinuman] = 0
 		}
 	}
+
+	t.stokMinuman[namaMinuman] = 0
 }
 
 func (t *toko) minumanIsAvailable(minuman Minuman, qty int) bool {
