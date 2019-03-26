@@ -44,21 +44,19 @@ func (t *toko) JualMinuman(minuman Minuman, qty int) bool {
 func (t *toko) TambahStokMinuman(minuman Minuman, qty int) {
 	namaMinuman := minuman.Nama
 
-	if stok, ok := t.stokMinuman[namaMinuman]; ok {
-		t.stokMinuman[namaMinuman] = stok + qty
-	} else {
-		t.stokMinuman[namaMinuman] = qty
-	}
+	stok := t.stokMinuman[namaMinuman]
+
+	t.stokMinuman[namaMinuman] = stok + qty
 }
 
 func (t *toko) kurangStokMinuman(minuman Minuman, qty int) {
 	namaMinuman := minuman.Nama
 
 	if stok, ok := t.stokMinuman[namaMinuman]; ok {
+		t.stokMinuman[namaMinuman] = 0
+
 		if stok > 0 {
 			t.stokMinuman[namaMinuman] = stok - 1
-		} else {
-			t.stokMinuman[namaMinuman] = 0
 		}
 	}
 }
