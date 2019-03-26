@@ -27,7 +27,7 @@ func TestTambahStokMinuman(t *testing.T) {
 		Nama:  "Sprite",
 		Harga: 5000,
 	}
-	toko.TambahStokMinuman(m, 10)
+	toko.TambahStokMinuman(m, 15)
 	result := toko.JualMinuman(m, 10)
 
 	assert.Equal(t, true, result)
@@ -41,6 +41,7 @@ func TestJualMinumanWhenNotAvailable(t *testing.T) {
 		Harga: 5000,
 	}
 	toko.TambahStokMinuman(m, 1)
+	toko.TambahStokMinuman(m, 2)
 	result := toko.JualMinuman(m, 10)
 
 	assert.Equal(t, false, result)
