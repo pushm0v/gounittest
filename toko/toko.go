@@ -38,6 +38,7 @@ func (t *toko) JualMinuman(minuman Minuman, qty int) bool {
 		return true
 	}
 
+	t.kurangStokMinuman(minuman, qty)
 	return false
 }
 
@@ -55,8 +56,8 @@ func (t *toko) kurangStokMinuman(minuman Minuman, qty int) {
 	namaMinuman := minuman.Nama
 
 	if stok, ok := t.stokMinuman[namaMinuman]; ok {
-		if stok > 0 {
-			t.stokMinuman[namaMinuman] = stok - 1
+		if stok >= qty {
+			t.stokMinuman[namaMinuman] = stok - qty
 		} else {
 			t.stokMinuman[namaMinuman] = 0
 		}
