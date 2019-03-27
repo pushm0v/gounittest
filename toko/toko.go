@@ -5,6 +5,7 @@ type Toko interface {
 	IsBuka() bool
 	Tutup()
 	TambahStokMinuman(minuman Minuman, qty int)
+	TotalStokMinuman(minuman Minuman) int
 	JualMinuman(minuman Minuman, qty int) bool
 }
 
@@ -44,33 +45,29 @@ func (t *toko) JualMinuman(minuman Minuman, qty int) bool {
 func (t *toko) TambahStokMinuman(minuman Minuman, qty int) {
 	namaMinuman := minuman.Nama
 
-	if stok, ok := t.stokMinuman[namaMinuman]; ok {
-		t.stokMinuman[namaMinuman] = stok + qty
-	} else {
-		t.stokMinuman[namaMinuman] = qty
-	}
+	stok := t.TotalStokMinuman(minuman)
+	t.stokMinuman[namaMinuman] = stok + qty
 }
 
 func (t *toko) kurangStokMinuman(minuman Minuman, qty int) {
 	namaMinuman := minuman.Nama
 
-	if stok, ok := t.stokMinuman[namaMinuman]; ok {
-		if stok > 0 {
-			t.stokMinuman[namaMinuman] = stok - 1
-		} else {
-			t.stokMinuman[namaMinuman] = 0
-		}
+	stok := t.TotalStokMinuman(minuman)
+	if stok > 0 {
+		t.stokMinuman[namaMinuman] = stok - qty
 	}
 }
 
 func (t *toko) minumanIsAvailable(minuman Minuman, qty int) bool {
+	return t.TotalStokMinuman(minuman) >= qty
+}
+
+func (t *toko) TotalStokMinuman(minuman Minuman) int {
 	namaMinuman := minuman.Nama
 
 	if stok, ok := t.stokMinuman[namaMinuman]; ok {
-		if stok >= qty {
-			return true
-		}
+		return stok
 	}
 
-	return false
+	return 0
 }

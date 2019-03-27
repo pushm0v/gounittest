@@ -27,13 +27,15 @@ func TestTambahStokMinuman(t *testing.T) {
 		Nama:  "Sprite",
 		Harga: 5000,
 	}
-	toko.TambahStokMinuman(m, 10)
-	result := toko.JualMinuman(m, 10)
 
-	assert.Equal(t, true, result)
+	expected := 1
+	toko.TambahStokMinuman(m, 1)
+	stok := toko.TotalStokMinuman(m)
+
+	assert.Equal(t, true, expected == stok)
 }
 
-func TestJualMinumanWhenNotAvailable(t *testing.T) {
+func TestJualMinuman(t *testing.T) {
 	toko := NewToko()
 	toko.Buka()
 	m := Minuman{
@@ -41,7 +43,8 @@ func TestJualMinumanWhenNotAvailable(t *testing.T) {
 		Harga: 5000,
 	}
 	toko.TambahStokMinuman(m, 1)
-	result := toko.JualMinuman(m, 10)
+	toko.JualMinuman(m, 1)
+	result := toko.JualMinuman(m, 1)
 
 	assert.Equal(t, false, result)
 }
