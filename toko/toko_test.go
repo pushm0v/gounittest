@@ -57,8 +57,7 @@ func TestTambahStokMinuman(t *testing.T) {
 	ts.On("UpdateStok", m.Nama, expected)
 
 	toko.TambahStokMinuman(m, expected)
-	ts.AssertNumberOfCalls(t, "GetStok", 1)
-	ts.AssertNumberOfCalls(t, "UpdateStok", 1)
+	ts.AssertExpectations(t)
 }
 
 func TestJualMinuman(t *testing.T) {
@@ -77,6 +76,7 @@ func TestJualMinuman(t *testing.T) {
 	result := toko.JualMinuman(m, 1)
 
 	assert.Equal(t, true, result)
+	ts.AssertExpectations(t)
 }
 
 func TestJualMinumanNotAvailable(t *testing.T) {
@@ -88,13 +88,13 @@ func TestJualMinumanNotAvailable(t *testing.T) {
 		Harga: 5000,
 	}
 	expected := 1
-	ts.On("UpdateStok", m.Nama, expected)
+
 	ts.On("IsStokAvailable", m.Nama, expected).Return(false)
-	ts.On("GetStok", m.Nama).Return(1)
 
 	result := toko.JualMinuman(m, 1)
 
 	assert.Equal(t, false, result)
+	ts.AssertExpectations(t)
 }
 
 func TestTotalStokMinuman(t *testing.T) {
@@ -111,4 +111,5 @@ func TestTotalStokMinuman(t *testing.T) {
 	result := toko.TotalStokMinuman(m)
 
 	assert.Equal(t, true, expected == result)
+	ts.AssertExpectations(t)
 }
