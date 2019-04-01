@@ -32,7 +32,7 @@ build:
 	go build -ldflags "-X github.com/pushm0v/gounittest/version.GitCommit=${GIT_COMMIT}${GIT_DIRTY} -X github.com/pushm0v/gounittest/version.BuildDate=${BUILD_DATE}" -o bin/${BIN_NAME}
 
 get-deps:
-	dep ensure
+	dep ensure -v
 
 build-alpine:
 	@echo "building ${BIN_NAME} ${VERSION}"
