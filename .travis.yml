@@ -1,9 +1,17 @@
 language: go
 
 go:
-  - 1.8.x
+  - 1.11
   - master
 
+notifications:
+  email: false
+
 install:
+  - # skip
+
+script:
   - go get -v github.com/Masterminds/glide 
   - make get-deps
+  - make test
+  - ls # debug purpose
