@@ -9,6 +9,7 @@ type tokoStorage struct {
 type TokoStorage interface {
 	UpdateStok(nama string, qty int)
 	IsStokAvailable(nama string, qty int) bool
+	GetStok(nama string) int
 }
 
 func NewTokoStorage() TokoStorage {
@@ -29,4 +30,10 @@ func (ts *tokoStorage) IsStokAvailable(nama string, qty int) bool {
 	}
 
 	return false
+}
+
+func (ts *tokoStorage) GetStok(nama string) int {
+	stok, _ := ts.storage.Fetch(nama).(int)
+
+	return stok
 }

@@ -20,6 +20,8 @@ help:
 	@echo '    make package         Build final docker image with just the go binary inside'
 	@echo '    make tag             Tag image created by package with latest, git commit and version'
 	@echo '    make test            Run tests on a compiled project.'
+	@echo '    make coverage        Run test coverage on a compiled project.'
+	@echo '    make total-coverage  Run test coverage on a compiled project and get total coverage in number'
 	@echo '    make push            Push tagged images to registry'
 	@echo '    make clean           Clean the directory tree.'
 	@echo
@@ -59,3 +61,5 @@ clean:
 test:
 	go test ./...
 
+total-coverage:
+	#go test ./... -coverprofile cover.out; go tool cover -func cover.out | tail -n 1 | awk '{ print $3 }' | sed -e "s/^\([0-9]*\).*\$/\1/g"
