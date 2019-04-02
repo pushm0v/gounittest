@@ -1,6 +1,7 @@
 # gounittest
 
 [![Coverage Status](https://coveralls.io/repos/github/pushm0v/gounittest/badge.svg?branch=master)](https://coveralls.io/github/pushm0v/gounittest?branch=master)
+[![Build Status](https://travis-ci.org/pushm0v/gounittest.svg?branch=master)](https://travis-ci.org/pushm0v/gounittest)
 
 A Golang Unit Test Project
 
