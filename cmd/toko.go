@@ -12,7 +12,8 @@ var tokoCmd = &cobra.Command{
 	Short: "Start toko app",
 	Long:  `Toko app is our simple app for selling goods`,
 	Run: func(cmd *cobra.Command, args []string) {
-		toko := t.NewToko()
+		ts := t.NewTokoStorage()
+		toko := t.NewToko(ts)
 		toko.Buka()
 		minuman := t.Minuman{
 			Nama:  "Sprite",
