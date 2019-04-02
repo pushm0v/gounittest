@@ -1,5 +1,7 @@
 # gounittest
 
+[![Coverage Status](https://coveralls.io/repos/github/pushm0v/gounittest/badge.svg?branch=master)](https://coveralls.io/github/pushm0v/gounittest?branch=master)
+
 A Golang Unit Test Project
 
 ## Getting started
