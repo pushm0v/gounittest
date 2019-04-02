@@ -12,17 +12,19 @@ type Toko interface {
 type toko struct {
 	isBuka      bool
 	stokMinuman map[string]int
+	kulkas      TokoStorage
 }
 
-func NewToko() Toko {
-	toko := &toko{}
+func NewToko(ts TokoStorage) Toko {
+	toko := &toko{
+		kulkas: ts,
+	}
 
 	return toko
 }
 
 func (t *toko) Buka() {
 	t.isBuka = true
-	t.stokMinuman = make(map[string]int)
 }
 
 func (t *toko) IsBuka() bool {
@@ -34,7 +36,7 @@ func (t *toko) Tutup() {
 }
 
 func (t *toko) JualMinuman(minuman Minuman, qty int) bool {
-	if t.minumanIsAvailable(minuman, qty) {
+	if t.kulkas.IsStokAvailable(minuman.Nama, qty) {
 		t.kurangStokMinuman(minuman, qty)
 		return true
 	}
@@ -45,29 +47,18 @@ func (t *toko) JualMinuman(minuman Minuman, qty int) bool {
 func (t *toko) TambahStokMinuman(minuman Minuman, qty int) {
 	namaMinuman := minuman.Nama
 
-	stok := t.TotalStokMinuman(minuman)
-	t.stokMinuman[namaMinuman] = stok + qty
+	stok := t.kulkas.GetStok(namaMinuman)
+	t.kulkas.UpdateStok(namaMinuman, stok+qty)
 }
 
 func (t *toko) kurangStokMinuman(minuman Minuman, qty int) {
 	namaMinuman := minuman.Nama
 
-	stok := t.TotalStokMinuman(minuman)
-	if stok > 0 {
-		t.stokMinuman[namaMinuman] = stok - qty
-	}
-}
-
-func (t *toko) minumanIsAvailable(minuman Minuman, qty int) bool {
-	return t.TotalStokMinuman(minuman) >= qty
+	stok := t.kulkas.GetStok(namaMinuman)
+	t.kulkas.UpdateStok(namaMinuman, stok-qty)
 }
 
 func (t *toko) TotalStokMinuman(minuman Minuman) int {
 	namaMinuman := minuman.Nama
-
-	if stok, ok := t.stokMinuman[namaMinuman]; ok {
-		return stok
-	}
-
-	return 0
+	return t.kulkas.GetStok(namaMinuman)
 }
