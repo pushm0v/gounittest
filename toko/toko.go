@@ -1,5 +1,7 @@
 package toko
 
+import "github.com/pushm0v/gounittest/service"
+
 type Toko interface {
 	Buka()
 	IsBuka() bool
@@ -10,14 +12,16 @@ type Toko interface {
 }
 
 type toko struct {
-	isBuka      bool
-	stokMinuman map[string]int
-	kulkas      TokoStorage
+	isBuka       bool
+	kulkas       TokoStorage
+	dummyService service.DummyService
 }
 
 func NewToko(ts TokoStorage) Toko {
+	ds := service.NewDummyService()
 	toko := &toko{
-		kulkas: ts,
+		kulkas:       ts,
+		dummyService: ds,
 	}
 
 	return toko
