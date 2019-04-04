@@ -2,3 +2,4 @@ bin
 vendor
 .vscode
 *.out
+coverage.txt
