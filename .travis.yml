@@ -12,6 +12,8 @@ script:
 - make test
 - $GOPATH/bin/goveralls -service=travis-ci
 - ls
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 env:
   global:
     secure: VxNpBaudAOCn19G/myqu1LkdsIVNlRH3iCJl+IwdLLkJgcWiBpWTB+DHnDbUiO5b8SSYd6anLbhBmxqFqi99nOAHbQ0h5xuykHWteGF2NnC7LHBDhZzi71AzoeAFuZ9VWU58ZM5AJcmrQPf/4Zf/3XHiFqJpSNDoMWtf2EBRnyNHNvU1cCD40S7LzpveJcR8WMjj8yGCHVv5IsD9SYTVWp7Eg6QnnPfsG/GMONFQXC0RrZgpvqi8ezpYgWCA6V5BE/MIdFW/XvgpuDEBI3QUr6v5dMdmX9iKqsVSDevh2Cw9HBKMfNxKJd5uw75t+8StKjATSA+sc2Ylc6ZxTX4NIqzMZc24tBPNY7J7CktxUoM+3FF8K14jnsuqS7m/amjbiA7vEcUfdJMhdjbmXR0A2nGExmhvDDQfIU3Paya/RvaKon/dlhoDMg/hztgOzneQhrxjBT5eTIb8TLFFZCo49+0HoIJIk/IGtYwhwWxqjT36azBvxcI14f2u7fuCeDnbq2SWqzG5Jx+kBEVDpFWT7CM04GNFUPSk2UpaY3WtJ+oeGln4nZbrm/r6BqhUPeCOsJ+Mozringz828DvYk2vRhcRW3GIddyJwpHW6jB5ybHEb7UCj/MDcxTll2aeoT+lXwHe9qnd/chGazkCOr6pSjmB8pX65FZjVEITFW8TilY=
